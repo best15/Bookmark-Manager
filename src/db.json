@@ -1,0 +1,23 @@
+{
+"data": [{
+    "id": "1a2b3c4d",
+    "title": "React Documentation",
+    "url": "https://react.dev",
+    "category": "Programming",
+    "isRead": true
+    },
+    {
+    "id": "5e6f7g8h",
+    "title": "CSS Tricks",
+    "url": "https://css-tricks.com",
+    "category": "Design",
+    "isRead": false
+    },
+    {
+    "id": "9i0j1k2l",
+    "title": "Todoist",
+    "url": "https://todoist.com",
+    "category": "Productivity",
+    "isRead": false
+    }]
+}
