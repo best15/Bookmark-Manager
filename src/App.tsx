@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import './App.css'
 import file from './db.json'
 
@@ -16,7 +16,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 function App() {
  const { data } = file;
- const unReadBooks = data.filter((book) => !book.isRead);
+ const unReadBooks = useMemo(() => data.filter((item) => !item.isRead), [data]);
 
   return (
     <>
