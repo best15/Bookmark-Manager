@@ -1,6 +1,5 @@
 import { useContext, useMemo } from "react";
 
-import { BookContext } from "@/App";
 import {
   Table,
   TableBody,
@@ -12,10 +11,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
+import { BooksContext } from "@/providers/books/BooksProvider";
 import { BookType } from "@/types";
 
 const BooksTable = () => {
-  const { books, updateBookList } = useContext(BookContext);
+  const { books, updateBookList } = useContext(BooksContext);
   const unReadBooks = useMemo(
     () => books?.filter((book: BookType) => !book.isRead),
     [books]
@@ -23,7 +23,7 @@ const BooksTable = () => {
 
   return (
     <div className="p-10 max-w-3xl mx-auto">
-      <Table>
+      {books.length > 0 && (<Table>
         <TableCaption>A list of your bookmarks.</TableCaption>
         <h1 className="text-2xl font-bold text-center sm:hidden">Bookmarks</h1>
         <TableHeader className="hidden sm:table-header-group">
@@ -69,7 +69,7 @@ const BooksTable = () => {
             <TableCell>{unReadBooks?.length}</TableCell>
           </TableRow>
         </TableFooter>
-      </Table>
+      </Table>)}
     </div>
   );
 };
