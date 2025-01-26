@@ -65,18 +65,29 @@ export default function ImportBooks({
   });
 
   return (
-    <div
-      {...getRootProps()}
-      className={`border-2 border-dashed p-6 rounded-lg cursor-pointer ${
-        isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
-      }`}
-    >
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <p className="text-blue-600">Drop the JSON file here...</p>
-      ) : (
-        <p>Drag & drop a JSON file here, or click to select a file.</p>
-      )}
+    <div>
+      {/* Description */}
+      <div className="mb-4 text-center">
+        <h2 className="text-xl font-bold">Import Books</h2>
+        <p className="text-sm text-gray-600">
+          Upload a JSON file to visualize and manage your book data
+          effortlessly.
+        </p>
+      </div>
+      {/* Dropzone */}
+      <div
+        {...getRootProps()}
+        className={`border-2 border-dashed p-6 rounded-lg cursor-pointer ${
+          isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
+        }`}
+      >
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p className="text-blue-600">Drop the JSON file here...</p>
+        ) : (
+          <p>Drag & drop a JSON file here, or click to select a file.</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -7,13 +7,21 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { BookType } from "@/types";
+
+interface ConfirmDeleteDialogProps {
+  book: BookType;
+  onConfirm: (id: string) => void;
+  isOpen: boolean;
+  onClose: () => void;
+}
 
 export default function ConfirmDeleteDialog({
   book,
   onConfirm,
   isOpen,
   onClose,
-}: any) {
+}: ConfirmDeleteDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
