@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { useDropzone } from "react-dropzone";
+
 import { BookType } from "@/types";
 
 export default function ImportBooks({
@@ -22,27 +23,16 @@ export default function ImportBooks({
       try {
         const jsonData = JSON.parse(reader.result as string);
 
-        if (
-          !Array.isArray(jsonData) ||
-          !jsonData.every((book) => book.title && book.category)
-        ) {
+        if (!Array.isArray(jsonData)) {
           toast.error(
             "Invalid JSON structure. Please provide a valid book list."
           );
           return;
         }
 
-        if (
-          !jsonData.every(
-            (book) =>
-              book.id &&
-              book.title &&
-              book.category &&
-              typeof book.isRead === "boolean"
-          )
-        ) {
+        if (!jsonData.every((book) => book.id && book.title)) {
           toast.error(
-            "Invalid book data structure. Each book should have 'id', 'title', 'category', and 'isRead' fields."
+            "Invalid book data structure. Each book should have 'id', 'title', fields."
           );
           return;
         }
@@ -65,29 +55,18 @@ export default function ImportBooks({
   });
 
   return (
-    <div>
-      {/* Description */}
-      <div className="mb-4 text-center">
-        <h2 className="text-xl font-bold">Import Books</h2>
-        <p className="text-sm text-gray-600">
-          Upload a JSON file to visualize and manage your book data
-          effortlessly.
-        </p>
-      </div>
-      {/* Dropzone */}
-      <div
-        {...getRootProps()}
-        className={`border-2 border-dashed p-6 rounded-lg cursor-pointer ${
-          isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
-        }`}
-      >
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p className="text-blue-600">Drop the JSON file here...</p>
-        ) : (
-          <p>Drag & drop a JSON file here, or click to select a file.</p>
-        )}
-      </div>
+    <div
+      {...getRootProps()}
+      className={`border-2 border-dashed p-6 rounded-lg cursor-pointer ${
+        isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
+      }`}
+    >
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p className="text-blue-600">Drop the JSON file here...</p>
+      ) : (
+        <p>Drag & drop a JSON file here, or click to select a file.</p>
+      )}
     </div>
   );
 }

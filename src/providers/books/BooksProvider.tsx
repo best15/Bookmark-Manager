@@ -8,9 +8,9 @@ import {
   useState,
 } from "react";
 import short from "short-uuid";
-import { BookContextType, BookType, BookUpdates } from "@/types";
-// import data from "@/db.json";
 import { toast } from "react-toastify";
+
+import { BookContextType, BookType, BookUpdates } from "@/types";
 
 const initialConextValue: BookContextType = {
   selectedBook: null,

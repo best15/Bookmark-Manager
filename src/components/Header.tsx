@@ -1,6 +1,9 @@
 import { useContext } from "react";
+
+import ImportExport from "./ImportExport";
+
 import { BooksContext } from "@/providers/books/BooksProvider";
-import HeaderWithImportExport from "@/components/HeaderImportExport";
+
 import { BookType } from "@/types";
 
 export default function ImportFeature() {
@@ -23,6 +26,9 @@ export default function ImportFeature() {
   };
 
   return (
-    <HeaderWithImportExport onImport={handleImport} onExport={handleExport} />
+    <div className="flex justify-between items-center mb-4 p-4 border-b border-gray-200">
+      <h1 className="text-2xl font-bold">Bookmark Manager</h1>
+      <ImportExport onImport={handleImport} onExport={handleExport} />
+    </div>
   );
 }

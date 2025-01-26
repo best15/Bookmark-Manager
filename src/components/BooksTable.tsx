@@ -10,14 +10,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { BooksContext } from "@/providers/books/BooksProvider";
-import { BookType } from "@/types";
-import { Button } from "@/components/ui/button";
+} from "./ui/table";
 import { Label } from "./ui/label";
-import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
+import { Button } from "./ui/button";
+import { Checkbox } from "./ui/checkbox";
 import ImportBooks from "./ImportBooks";
+import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
+
+import { BooksContext } from "@/providers/books/BooksProvider";
+
+import { BookType } from "@/types";
 
 const BooksTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -182,7 +184,17 @@ const BooksTable = () => {
           </div>
         </>
       ) : (
-        <ImportBooks onImport={(data: BookType[]) => setBooks(data)} />
+        <div>
+          {/* Description */}
+          <div className="mb-4 text-center">
+            <h2 className="text-xl font-bold">Import Books</h2>
+            <p className="text-sm text-gray-600">
+              Upload a JSON file to visualize and manage your book data
+              effortlessly.
+            </p>
+          </div>
+          <ImportBooks onImport={(data: BookType[]) => setBooks(data)} />
+        </div>
       )}
     </div>
   );

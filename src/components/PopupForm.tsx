@@ -1,8 +1,6 @@
 import { useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -10,17 +8,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+} from "./ui/dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
+} from "./ui/select";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { Checkbox } from "./ui/checkbox";
+
 import { BooksContext } from "@/providers/books/BooksProvider";
+
 import { BookUpdates } from "@/types";
 
 export default function PopupForm() {
@@ -79,7 +81,9 @@ export default function PopupForm() {
         <DialogHeader>
           <DialogTitle>{selectedBook ? "Edit Book" : "Add Book"}</DialogTitle>
           <DialogDescription>
-            Make changes to your book here. Click save when you're done.
+            {selectedBook
+              ? "Make changes to your book here. Click save when you're done."
+              : "Fill out details of your new book here."}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -132,7 +136,7 @@ export default function PopupForm() {
             {/* URL */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="url" className="text-right">
-                Url
+                URL
               </Label>
               <Controller
                 name="url"
