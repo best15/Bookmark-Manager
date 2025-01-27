@@ -2,27 +2,28 @@ import { useContext } from "react";
 
 import ImportExport from "./ImportExport";
 
-import { BooksContext } from "@/providers/books/BooksProvider";
+import { BookmarksContext } from "@/providers/bookmarks/BookmarksProvider";
 
-import { BookType } from "@/types";
+import { BookmarkType } from "@/types";
 
 export default function ImportFeature() {
-  const { books, setBooks } = useContext(BooksContext);
+  const { bookmarks, setBookmarks } = useContext(BookmarksContext);
 
   const handleExport = () => {
-    const jsonData = books;
+    const jsonData = bookmarks;
     const jsonString = JSON.stringify(jsonData, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
     const link = document.createElement("a");
 
     link.href = URL.createObjectURL(blob);
-    link.download = "books.json";
+    link.download = "bookmarks.json";
 
     link.click();
   };
 
-  const handleImport = (data: BookType[]) => {
-    setBooks(data);
+  const handleImport = (bookmarks: BookmarkType[]) => {
+    setBookmarks(bookmarks);
+    localStorage.setItem("Bookmarks", JSON.stringify(bookmarks));
   };
 
   return (

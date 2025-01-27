@@ -7,17 +7,17 @@ import PopupForm from "./components/PopupForm";
 import BooksTable from "./components/BooksTable";
 import FloatingActionButton from "./components/ActionButton";
 
-import { BooksProvider } from "./providers/books/BooksProvider";
+import { BookmarksProvider } from "./providers/bookmarks/BookmarksProvider";
 
 function App() {
   return (
-    <BooksProvider>
+    <BookmarksProvider>
       <Header />
       <BooksTable />
       <FloatingActionButton />
       <PopupForm />
       <ToastContainer />
-    </BooksProvider>
+    </BookmarksProvider>
   );
 }
 

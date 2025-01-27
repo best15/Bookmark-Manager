@@ -12,10 +12,10 @@ import {
 import { Button } from "./ui/button";
 import ImportBooks from "./ImportBooks";
 
-import { BookType } from "@/types";
+import { BookmarkType } from "@/types";
 
 interface ImportExportProps {
-  onImport: (books: BookType[]) => void;
+  onImport: (books: BookmarkType[]) => void;
   onExport: () => void;
 }
 
@@ -41,9 +41,9 @@ export default function ImportExport({
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Import Books</DialogTitle>
+            <DialogTitle>Import Bookmarks</DialogTitle>
             <DialogDescription>
-              Upload a JSON file to replace the existing book data.
+              Upload a JSON file to replace the existing bookmark data.
             </DialogDescription>
           </DialogHeader>
           <ImportBooks

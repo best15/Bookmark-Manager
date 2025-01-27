@@ -1,4 +1,4 @@
-export interface BookType {
+export interface BookmarkType {
   id: string;
   title: string;
   url?: string;
@@ -6,23 +6,24 @@ export interface BookType {
   isRead?: boolean;
 }
 
-export interface BookUpdates {
+export interface BookmarkUpdates {
   title?: string;
   url?: string;
   category?: string;
   isRead?: boolean;
 }
 
-export interface BookContextType {
-  selectedBook: BookType | null;
-  books: BookType[];
+export interface BookmarkContextType {
+  bookmarks: BookmarkType[];
+  loading: boolean;
+  selectedBookmark: BookmarkType | null;
   popup: {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
   };
-  setBooks: (books: BookType[]) => void;
-  setSelectedBook: (book: BookType | null) => void;
-  addBook: (book: BookUpdates) => void;
-  updateBook: (id: string, updates: BookUpdates) => void;
-  deleteBook: (id: string) => void;
+  setBookmarks: (bookmarks: BookmarkType[]) => void;
+  setSelectedBookmark: (bookmark: BookmarkType | null) => void;
+  addBookmark: (bookmark: BookmarkUpdates) => void;
+  updateBookmarks: (id: string, updates: BookmarkUpdates) => void;
+  deleteBookmark: (id: string) => void;
 }

@@ -8,17 +8,17 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 
-import { BookType } from "@/types";
+import { BookmarkType } from "@/types";
 
 interface ConfirmDeleteDialogProps {
-  book: BookType;
+  bookmark: BookmarkType;
   onConfirm: (id: string) => void;
   isOpen: boolean;
   onClose: () => void;
 }
 
 export default function ConfirmDeleteDialog({
-  book,
+  bookmark,
   onConfirm,
   isOpen,
   onClose,
@@ -29,11 +29,11 @@ export default function ConfirmDeleteDialog({
         <DialogHeader>
           <DialogTitle>Confirm Delete</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete <b>{book.title}</b> book ?
+            Are you sure you want to delete <b>{bookmark.title}</b> bookmark ?
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button onClick={() => onConfirm(book.id)}>Yes</Button>
+          <Button onClick={() => onConfirm(bookmark.id)}>Yes</Button>
           <Button onClick={onClose} variant="outline">
             No
           </Button>

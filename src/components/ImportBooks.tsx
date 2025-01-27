@@ -1,13 +1,13 @@
 import { toast } from "react-toastify";
 import { useDropzone } from "react-dropzone";
 
-import { BookType } from "@/types";
+import { BookmarkType } from "@/types";
 
 export default function ImportBooks({
   onImport,
   closeDialog = () => {},
 }: {
-  onImport: (data: BookType[]) => void;
+  onImport: (data: BookmarkType[]) => void;
   closeDialog?: () => void;
 }) {
   const handleDrop = (acceptedFiles: File[]) => {
@@ -25,21 +25,21 @@ export default function ImportBooks({
 
         if (!Array.isArray(jsonData)) {
           toast.error(
-            "Invalid JSON structure. Please provide a valid book list."
+            "Invalid JSON structure. Please provide a valid bookmark list."
           );
           return;
         }
 
-        if (!jsonData.every((book) => book.id && book.title)) {
+        if (!jsonData.every((bookmark) => bookmark.id && bookmark.title)) {
           toast.error(
-            "Invalid book data structure. Each book should have 'id', 'title', fields."
+            "Invalid bookmark data structure. Each bookmark should have 'id', 'title', fields."
           );
           return;
         }
 
         onImport(jsonData);
         closeDialog();
-        toast.success("Books imported successfully!");
+        toast.success("Bookmarks imported successfully!");
       } catch (error) {
         toast.error("Error parsing the JSON file. Please try again.");
         console.error(error);

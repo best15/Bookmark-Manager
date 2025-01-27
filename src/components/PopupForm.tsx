@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 
@@ -21,13 +22,18 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 
-import { BooksContext } from "@/providers/books/BooksProvider";
+import { BookmarksContext } from "@/providers/bookmarks/BookmarksProvider";
 
-import { BookUpdates } from "@/types";
+import { BookmarkUpdates } from "@/types";
 
 export default function PopupForm() {
-  const { popup, selectedBook, setSelectedBook, addBook, updateBook } =
-    useContext(BooksContext);
+  const {
+    popup,
+    selectedBookmark,
+    setSelectedBookmark,
+    addBookmark,
+    updateBookmarks,
+  } = useContext(BookmarksContext);
   const { isOpen, setIsOpen } = popup;
 
   const {
@@ -43,10 +49,11 @@ export default function PopupForm() {
       isRead: false,
     },
   });
+
   useEffect(() => {
     if (isOpen) {
       reset(
-        selectedBook || {
+        selectedBookmark || {
           title: "",
           category: "",
           url: "",
@@ -55,23 +62,22 @@ export default function PopupForm() {
       );
     } else {
       reset({});
-      setSelectedBook(null);
+      setSelectedBookmark(null);
     }
-  }, [isOpen, reset, selectedBook, popup, setSelectedBook]);
+  }, [isOpen, reset, selectedBookmark, popup, setSelectedBookmark]);
 
-  const onSubmit = async (data: BookUpdates) => {
+  const onSubmit = async (data: BookmarkUpdates) => {
     try {
-      if (selectedBook) {
-        await updateBook(selectedBook.id, data);
-        console.log("Updated successfully:", data);
+      if (selectedBookmark) {
+        await updateBookmarks(selectedBookmark.id, data);
       } else {
-        await addBook(data);
-        console.log("Added successfully:", data);
+        await addBookmark(data);
       }
 
       setIsOpen(false);
     } catch (error) {
-      console.error("Failed to save the book:", error);
+      toast.error("Error saving bookmark. Please try again.");
+      console.error("Failed to save the bookmark.", error);
     }
   };
 
@@ -79,11 +85,13 @@ export default function PopupForm() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{selectedBook ? "Edit Book" : "Add Book"}</DialogTitle>
+          <DialogTitle>
+            {selectedBookmark ? "Edit Bookmark" : "Add Bookmark"}
+          </DialogTitle>
           <DialogDescription>
-            {selectedBook
-              ? "Make changes to your book here. Click save when you're done."
-              : "Fill out details of your new book here."}
+            {selectedBookmark
+              ? "Make changes to your bookmark here. Click save when you're done."
+              : "Fill out details of your new bookmark here."}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -200,7 +208,7 @@ export default function PopupForm() {
           )}
           <DialogFooter>
             <Button type="submit">
-              {selectedBook ? "Save changes" : "Add Book"}
+              {selectedBookmark ? "Save changes" : "Add Book"}
             </Button>
           </DialogFooter>
         </form>
