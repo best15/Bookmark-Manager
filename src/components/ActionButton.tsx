@@ -28,7 +28,7 @@ export default function FloatingActionButton() {
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Add Book</p>
+            <p>Add Bookmark</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

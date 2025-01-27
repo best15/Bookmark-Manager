@@ -11,6 +11,12 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
@@ -139,20 +145,41 @@ const BooksTable = () => {
                   </TableCell>
                   <TableCell>
                     <div className="flex">
-                      <Button
-                        variant="outline"
-                        onClick={() => handleClickEdit(bookmark)}
-                        className="h-8 w-8 p-0 border-2 rounded-full group-hover:border-blue-500 [&_svg]:size-4"
-                      >
-                        <Edit className="w-4 h-4 text-blue-500" />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        onClick={() => handleClickDelete(bookmark.id)}
-                        className="h-8 w-8 p-0 ml-2 border-2 rounded-full group-hover:border-red-500 [&_svg]:size-4"
-                      >
-                        <Trash className="w-4 h-4 text-red-500" />
-                      </Button>
+                      {/* Edit button */}
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              onClick={() => handleClickEdit(bookmark)}
+                              className="h-8 w-8 p-0 border-2 rounded-full hover:border-blue-500 [&_svg]:size-4"
+                            >
+                              <Edit className="w-4 h-4 text-blue-500" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Edit</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+
+                      {/* Delete button */}
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              onClick={() => handleClickDelete(bookmark.id)}
+                              className="h-8 w-8 p-0 ml-2 border-2 rounded-full hover:border-red-500 [&_svg]:size-4"
+                            >
+                              <Trash className="w-4 h-4 text-red-500" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Delete</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                     <ConfirmDeleteDialog
                       bookmark={bookmark}
@@ -222,7 +249,7 @@ const BooksTable = () => {
         </>
       ) : (
         <div>
-          {/* Description */}
+          {/* Import Description */}
           <div className="mb-4 text-center">
             <h2 className="text-xl font-bold">Import Bookmarks</h2>
             <p className="text-sm text-gray-600">
